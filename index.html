@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#170d1d">
+<title>For You — Lilies & Asters</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Allura&display=swap');
+:root{--ink:#f5e5f9;--lav:#d8b1ef;--muted:#d0b9d7;--night:#170d1d}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:#170d1d;color:var(--ink);font-family:'Cormorant Garamond',Georgia,serif}
+.scene{min-height:100vh;position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 72% 45%,#4b2855 0%,#28152f 40%,#140b19 82%)}
+.scene:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.45;background-image:radial-gradient(1px 1px at 12% 20%,#fff 99%,transparent),radial-gradient(2px 2px at 78% 14%,#f1d7ff 99%,transparent),radial-gradient(1px 1px at 47% 36%,#fff 99%,transparent),radial-gradient(2px 2px at 23% 70%,#dcb0ff 99%,transparent),radial-gradient(1px 1px at 91% 62%,#fff 99%,transparent),radial-gradient(1px 1px at 65% 83%,#fff 99%,transparent)}
+main{max-width:1200px;margin:auto;min-height:100vh;padding:clamp(30px,5vw,70px);display:grid;grid-template-columns:.83fr 1.17fr;align-items:center;gap:12px}
+.letter{position:relative;z-index:5;padding:18px 0 26px 8px}
+.eyebrow{font:11px Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#d6b0e9}
+h1{font-size:clamp(44px,6.1vw,78px);font-weight:400;line-height:.98;margin:20px 0 14px;letter-spacing:-.025em}
+h1 em{color:#d7aaf0;font-weight:400}
+.heartline{font-size:24px;letter-spacing:.22em;color:#d9b1ed;margin:20px 0}
+p{max-width:340px;color:#dfcde4;font-size:18px;line-height:1.55;font-style:italic;margin:0 0 18px}
+p.small{font-size:17px;line-height:1.55}
+.signature{font-family:'Allura','Cormorant Garamond',cursive;font-size:38px;color:#dcb5f1;margin-top:20px;transform:rotate(-4deg);display:inline-block}
+.signature:after{content:"";display:block;width:100%;height:1px;background:#dcb5f1;transform:rotate(-5deg);margin-top:-5px}
+.tagline{margin-top:27px;color:#b99bc4;font-size:13px;letter-spacing:.16em}
+.stage{height:min(82vh,760px);min-height:470px;position:relative;display:grid;place-items:center}
+.halo{position:absolute;width:85%;height:75%;border-radius:50%;background:#a65ee929;filter:blur(50px);animation:glow 5s ease-in-out infinite alternate}
+.bouquet{width:min(100%,610px);height:100%;min-height:470px;position:relative;transform-origin:50% 78%;animation:bouquetSway 6s ease-in-out infinite alternate}
+.stems{position:absolute;inset:12% 5% 16%;z-index:1}
+.stem{position:absolute;bottom:0;left:50%;width:4px;height:var(--h);border-radius:100%;background:linear-gradient(90deg,#254632,#79a46d,#2d583b);transform-origin:bottom;transform:rotate(var(--r))}
+.leaf{position:absolute;bottom:var(--b);left:0;width:60px;height:24px;background:linear-gradient(135deg,#82a96f,#285039);border-radius:100% 0 100% 0;transform:rotate(var(--a));transform-origin:0 50%}
+.wrap{position:absolute;bottom:1%;left:50%;transform:translateX(-50%);width:79%;height:47%;clip-path:polygon(14% 0,86% 0,100% 100%,50% 79%,0 100%);background:linear-gradient(105deg,#77478b,#d5addd 25%,#8d5b9d 47%,#d2a9dd 68%,#5b306a);filter:drop-shadow(0 16px 22px #08040b99);z-index:4}
+.wrap:before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 22%,#fff3 23%,transparent 28%,transparent 68%,#fff3 69%,transparent 74%)}
+.ribbon{position:absolute;z-index:6;bottom:13%;left:50%;width:29%;height:8%;transform:translateX(-50%);border-radius:50%;background:linear-gradient(#dfb7f0,#75418e);box-shadow:0 5px 12px #120818}
+.ribbon:before,.ribbon:after{content:"";position:absolute;top:10%;width:65%;height:145%;background:linear-gradient(120deg,#bb8ad4,#613078);border:1px solid #e2b9fa55;z-index:-1}
+.ribbon:before{right:54%;clip-path:polygon(0 0,100% 0,80% 100%,25% 75%)}
+.ribbon:after{left:54%;clip-path:polygon(0 0,100% 0,75% 75%,20% 100%)}
+.bloom{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);transform:translate(-50%,-50%) rotate(var(--tilt,0deg));transform-origin:50% 85%;z-index:3;animation:flowerSway var(--speed,4s) ease-in-out infinite alternate}
+.lily .petal{position:absolute;left:50%;top:50%;width:30%;height:54%;transform-origin:50% 90%;border-radius:55% 55% 44% 44%;background:linear-gradient(180deg,#f3dfff 0%,#d3a0ee 32%,#9858c0 72%,#58246f 100%);box-shadow:inset -5px -7px 9px #42145244,0 0 15px #ce9bff25}
+.lily .petal:nth-child(1){transform:translate(-50%,-90%) rotate(0) scaleX(.8)}
+.lily .petal:nth-child(2){transform:translate(-50%,-90%) rotate(60deg) scaleX(.8)}
+.lily .petal:nth-child(3){transform:translate(-50%,-90%) rotate(120deg) scaleX(.8)}
+.lily .petal:nth-child(4){transform:translate(-50%,-90%) rotate(180deg) scaleX(.8)}
+.lily .petal:nth-child(5){transform:translate(-50%,-90%) rotate(240deg) scaleX(.8)}
+.lily .petal:nth-child(6){transform:translate(-50%,-90%) rotate(300deg) scaleX(.8)}
+.lily .center{position:absolute;left:50%;top:50%;width:9%;height:9%;border-radius:50%;transform:translate(-50%,-50%);background:#edca7d;box-shadow:0 0 0 4px #e4bb7844}
+.lily .stamen{position:absolute;left:50%;top:50%;height:27%;width:2px;background:#e0b574;transform-origin:bottom;z-index:2}
+.lily .stamen:after{content:"";position:absolute;top:-3px;left:-2px;width:6px;height:8px;border-radius:50%;background:#994a49}
+.lily .stamen:nth-of-type(8){transform:rotate(28deg)}.lily .stamen:nth-of-type(9){transform:rotate(-28deg)}.lily .stamen:nth-of-type(10){transform:rotate(65deg)}.lily .stamen:nth-of-type(11){transform:rotate(-65deg)}
+.aster .petal{position:absolute;left:50%;top:50%;width:15%;height:47%;transform-origin:50% 90%;border-radius:50% 50% 30% 30%;background:linear-gradient(#f0d9ff,#bc83e4 60%,#8043b0);box-shadow:inset -2px -3px 4px #51216e33}
+.aster .center{position:absolute;left:50%;top:50%;width:24%;height:24%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffe7a0,#d79b3f 65%,#965b29);box-shadow:0 0 5px #f3ca8b}
+.bud{position:absolute;left:var(--x);top:var(--y);width:17px;height:43px;border-radius:80% 20% 65% 35%;background:linear-gradient(90deg,#6e3c98,#c69adf,#74418b);transform:rotate(var(--r));animation:flowerSway 4s ease-in-out infinite alternate;z-index:2}
+.falling{position:absolute;top:-35px;color:#dcb9f4;animation:fall linear infinite;opacity:.8;pointer-events:none;z-index:2}
+@keyframes bouquetSway{from{transform:rotate(-1.4deg)}to{transform:rotate(1.4deg)}}
+@keyframes flowerSway{from{rotate:-4deg}to{rotate:4deg}}
+@keyframes glow{from{opacity:.45;transform:scale(.92)}to{opacity:1;transform:scale(1.08)}}
+@keyframes fall{0%{transform:translateY(-10vh) rotate(0);opacity:0}10%{opacity:.8}90%{opacity:.6}100%{transform:translateY(110vh) rotate(320deg);opacity:0}}
+@media(max-width:760px){main{grid-template-columns:1fr;padding:32px 23px 20px;gap:0}.letter{text-align:center;padding:8px 0 0}.letter p{margin-left:auto;margin-right:auto}.stage{height:470px;min-height:0;margin-top:-8px}.bouquet{min-height:450px;max-width:520px}h1{font-size:clamp(48px,11vw,68px);margin:15px 0}.heartline{margin:13px 0}.tagline{margin-top:15px}.signature{margin-top:5px}p{font-size:17px}.eyebrow{font-size:10px}}
+@media(max-width:390px){.stage{height:390px}.bouquet{min-height:390px}.letter p{font-size:16px}.signature{font-size:34px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+</style>
+</head>
+<body>
+<div class="scene">
+<main>
+<section class="letter">
+<div class="eyebrow">A little bouquet, just for you</div>
+<h1>You're my<br><em>favorite kind<br>of person...</em></h1>
+<div class="heartline">— ♡ —</div>
+<p>Just like these flowers, you make my world softer, brighter, and more beautiful.</p>
+<p class="small">Even on my hardest days, you somehow find a way to make me smile. The little things you do mean more to me than words could ever explain.</p>
+<p class="small">Thank you for being exactly who you are. If I could give you one thing, it would be the chance to see yourself through my eyes — so you could understand how special you truly are.</p>
+<div class="signature">Always, yours ♡</div>
+<div class="tagline">LILIES &amp; ASTERS · A LITTLE REMINDER OF YOU</div>
+</section>
+<section class="stage" aria-label="Bouquet of purple lilies and asters gently swaying">
+<div class="halo"></div><div class="bouquet">
+<div class="stems">
+<div class="stem" style="--r:-27deg;--h:67%"><i class="leaf" style="--b:34%;--a:20deg"></i></div>
+<div class="stem" style="--r:-15deg;--h:78%"><i class="leaf" style="--b:42%;--a:5deg"></i></div>
+<div class="stem" style="--r:0deg;--h:82%"><i class="leaf" style="--b:32%;--a:190deg"></i></div>
+<div class="stem" style="--r:15deg;--h:76%"><i class="leaf" style="--b:45%;--a:180deg"></i></div>
+<div class="stem" style="--r:28deg;--h:66%"><i class="leaf" style="--b:28%;--a:195deg"></i></div>
+</div>
+<div class="bud" style="--x:50%;--y:5%;--r:8deg"></div><div class="bud" style="--x:67%;--y:18%;--r:27deg"></div><div class="bud" style="--x:32%;--y:20%;--r:-27deg"></div><div class="bud" style="--x:79%;--y:34%;--r:40deg"></div>
+<div class="bloom lily" style="--x:49%;--y:31%;--s:180px;--tilt:-4deg;--speed:4.5s"><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><b class="center"></b><i class="stamen"></i><i class="stamen"></i><i class="stamen"></i><i class="stamen"></i></div>
+<div class="bloom lily" style="--x:31%;--y:48%;--s:135px;--tilt:-12deg;--speed:5s"><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><b class="center"></b><i class="stamen"></i><i class="stamen"></i><i class="stamen"></i><i class="stamen"></i></div>
+<div class="bloom lily" style="--x:67%;--y:49%;--s:145px;--tilt:10deg;--speed:4.2s"><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><b class="center"></b><i class="stamen"></i><i class="stamen"></i><i class="stamen"></i><i class="stamen"></i></div>
+<div class="bloom aster" style="--x:20%;--y:30%;--s:65px;--speed:3.8s"><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><b class="center"></b></div>
+<div class="bloom aster" style="--x:75%;--y:27%;--s:75px;--speed:4.8s"><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><b class="center"></b></div>
+<div class="bloom aster" style="--x:37%;--y:19%;--s:59px;--speed:4.1s"><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><b class="center"></b></div>
+<div class="bloom aster" style="--x:61%;--y:17%;--s:58px;--speed:3.6s"><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><b class="center"></b></div>
+<div class="bloom aster" style="--x:48%;--y:53%;--s:58px;--speed:4.3s"><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><b class="center"></b></div>
+<div class="wrap"></div><div class="ribbon"></div>
+</div></section>
+</main>
+</div>
+<script>
+for(let i=0;i<22;i++){const p=document.createElement('span');p.className='falling';p.textContent=i%4===0?'✦':'✿';p.style.left=Math.random()*100+'%';p.style.animationDuration=9+Math.random()*12+'s';p.style.animationDelay=-Math.random()*18+'s';p.style.fontSize=10+Math.random()*12+'px';document.querySelector('.scene').appendChild(p)}
+</script>
+</body>
+</html>
